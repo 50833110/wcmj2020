@@ -1634,6 +1634,25 @@
 </div>
 </div>
 <p>之後就可以透過近端的 .ppk private key 與 Github.com 上的 public key 對應, 無需輸入帳號密碼就可以進行 git push.</p>
+<h2>以Leo 來編輯blogger(w13-w14)</h2>
+<p>1.在編輯器中開啟leo，並安裝<span> google-api-python-client和oauth2client</span></p>
+<p>2.在leo中新增2個按鈕</p>
+<p>   Edit.</p>
+<p>from markdown import markdown<br/>from oauth2client import client<br/>from googleapiclient import sample_tools<br/>import os</p>
+<p>os.environ['TZ'] = 'Asia/Taipei'<br/>argv = ""<br/># 認證並建立服務<br/># name of the api is "blogger", version is "v3"<br/># description of the api is __doc__<br/># file name of the application: location of client_secrets.json<br/>service, flags = sample_tools.init(<br/> argv, 'blogger', 'v3', __doc__, "./../../client_secrets.json",<br/> scope='https://www.googleapis.com/auth/blogger')</p>
+<p><br/>def get_cat_tag_content(data):<br/> # 請注意, 因為 data 來自 .md 的檔案 內容, 第1行為 ---<br/> # 用跳行符號分割<br/> data_list = data.split("\n")<br/> #第 2 行為 title<br/> title= data_list[1]<br/> #第 4 行為 category<br/> category = data_list[3]<br/> #第 5 行為 tags<br/> tags = data_list[4]<br/> # 有多項資料的 content 型別為數列<br/> # 再將第 9 行之後的資料數列串回成以跳行隔開的資料<br/> content = "\n".join(data_list[8:])<br/> # 先將截斷摘要與內文的 pelican md 檔按符號, 換成 Blogger 的 &lt;!--more--&gt;<br/> content = content.replace('&lt;!-- PELICAN_END_SUMMARY --&gt;', '&lt;!--more--&gt;')<br/> # 接著若內容有 ~~~python 與 ~~~ 則換成 Wordpress 格式<br/> #content = content.replace('~~~python', '[code lang="python"]')<br/> #content = content.replace('~~~', '[/code]')<br/> return title, category, tags, content</p>
+<p># 從目前所在節點的 body pan 中取出類別, tags 以及文章內容<br/># p.h 為 @clean filename.md<br/># 因為要使用 @clean 節點掛上為後的 blogger post_id, 因此改為讀 .md 檔案<br/>md_filename = p.h.split(" ")[1]<br/>with open(md_filename, 'r', encoding="utf-8") as content_file:<br/> md_content = content_file.read()<br/># title_str, category_str, tags_str, content = get_cat_tag_content(p.b)<br/>title_str, category_str, tags_str, content = get_cat_tag_content(md_content)<br/>category = category_str.split(":")[1]<br/>tags = tags_str.split(":")[1].split(",")<br/>tags.append(category)<br/># title 是一個單獨的字串<br/>title = title_str.split(":")[1]<br/># 將 markdown 格式 content 轉為 html<br/>content = markdown(content)<br/># 以下處理 content 的 &lt;h2&gt; 標題<br/>content = content.replace("&lt;h2&gt;", "&lt;h2&gt;&lt;font size='4'&gt;")<br/>content = content.replace("&lt;/h2&gt;", "&lt;/font&gt;&lt;/h2&gt;")<br/># g.es(content)</p>
+<p>try:<br/> blogs = service.blogs()<br/> # 取得使用者所建立網誌名稱<br/> blogs = blogs.listByUser(userId='self').execute()<br/> blog_id = blogs["items"][0]["id"]<br/> # 設法取得原 post 的 id<br/> postid_outline = p.getLastChild()<br/> # 直接從標題取得 post 的 id 號碼<br/> post_id = postid_outline.h<br/> posts = service.posts()<br/> # 更新網誌文章時的 body<br/> body = {<br/> "kind": "blogger#post",<br/> "title": title,<br/> "content": content<br/> }<br/> # need to save postId to outline head<br/> update = posts.update(blogId=blog_id, postId=post_id, body=body, publish=True)<br/> update_doc = update.execute()<br/> os.remove("blogger.dat")<br/> g.es("post_id 為", post_id)<br/> g.es("已經將更新資料送往 Blogger!")<br/>except(client.AccessTokenRefreshError):<br/> g.es("error")</p>
+<p>Add.</p>
+<p>from markdown import markdown<br/>from oauth2client import client<br/>from googleapiclient import sample_tools<br/>import os</p>
+<p>os.environ['TZ'] = 'Asia/Taipei'<br/>argv = ""<br/># 認證並建立服務<br/># name of the api is "blogger", version is "v3"<br/># description of the api is __doc__<br/># file name of the application: location of client_secrets.json<br/>service, flags = sample_tools.init(<br/> argv, 'blogger', 'v3', __doc__, "./../../client_secrets.json",<br/> scope='https://www.googleapis.com/auth/blogger')</p>
+<p><br/>def get_cat_tag_content(data):<br/> # 請注意, 因為 data 來自 .md 的檔案 內容, 第1行為 ---<br/> # 用跳行符號分割<br/> data_list = data.split("\n")<br/> #第 2 行為 title<br/> title= data_list[1]<br/> #第 4 行為 category<br/> category = data_list[3]<br/> #第 5 行為 tags<br/> tags = data_list[4]<br/> # 有多項資料的 content 型別為數列<br/> # 再將第 9 行之後的資料數列串回成以跳行隔開的資料<br/> content = "\n".join(data_list[8:])<br/> # 先將截斷摘要與內文的 pelican md 檔按符號, 換成 Blogger 的 &lt;!--more--&gt;<br/> content = content.replace('&lt;!-- PELICAN_END_SUMMARY --&gt;', '&lt;!--more--&gt;')<br/> # 接著若內容有 ~~~python 與 ~~~ 則換成 Wordpress 格式<br/> #content = content.replace('~~~python', '[code lang="python"]')<br/> #content = content.replace('~~~', '[/code]')<br/> return title, category, tags, content</p>
+<p># 從目前所在節點的 body pan 中取出類別, tags 以及文章內容<br/># p.h 為 @clean filename.md<br/># 因為要使用 @clean 節點掛上為後的 blogger post_id, 因此改為讀 .md 檔案<br/>md_filename = p.h.split(" ")[1]<br/>with open(md_filename, 'r', encoding="utf-8") as content_file:<br/> md_content = content_file.read()<br/># title_str, category_str, tags_str, content = get_cat_tag_content(p.b)<br/>title_str, category_str, tags_str, content = get_cat_tag_content(md_content)<br/>category = category_str.split(":")[1]<br/>tags = tags_str.split(":")[1].split(",")<br/>tags.append(category)<br/># title 是一個單獨的字串<br/>title = title_str.split(":")[1]<br/># 將 markdown 格式 content 轉為 html<br/>content = markdown(content)<br/># 以下處理 content 的 &lt;h2&gt; 標題<br/>content = content.replace("&lt;h2&gt;", "&lt;h2&gt;&lt;font size='4'&gt;")<br/>content = content.replace("&lt;/h2&gt;", "&lt;/font&gt;&lt;/h2&gt;")<br/># g.es(content)</p>
+<p>try:<br/> '''<br/> users = service.users()<br/> # 取得使用者 profile 資料<br/> user = users.get(userId='self').execute()<br/> print('網誌名稱: %s' % user['displayName'])<br/> '''<br/> blogs = service.blogs()<br/> # 取得使用者所建立網誌名稱<br/> blogs = blogs.listByUser(userId='self').execute()<br/> # post_id is now blogs["items"][0]["id"]<br/> blog_id = blogs["items"][0]["id"]<br/> #for blog in blogs['items']:<br/> #print(blog['name'], blog['url'])<br/> posts = service.posts()<br/> # 新增網誌 post 時, 需要 post_id<br/> body = {<br/> "kind": "blogger#post",<br/> "id": blog_id,<br/> "title": title,<br/> # 利用 markdown 函式, 將 .md 的內文轉為 html, 作為 Blogger 的文章內容<br/> "content": content,<br/> "labels": tags<br/> }<br/> insert = posts.insert(blogId=blog_id, body=body)<br/> posts_doc = insert.execute()<br/> post_id = posts_doc["id"]<br/> #print(posts_doc)<br/> os.remove("blogger.dat")<br/> # 利用最後的 child 節點來儲存 post_id<br/> to_save_post_id = p.insertAsLastChild() <br/> # 改為內文為空的節點, id 直接標在 head 標題 <br/> to_save_post_id.b = ""<br/> to_save_post_id.h = post_id<br/> # 因為新增節點, commander 必須 redraw<br/> c.redraw()<br/> g.es("post_id 為", post_id)<br/> g.es("已經將資料送往 Blogger!")<br/>except(client.AccessTokenRefreshError):<br/> g.es("error")</p>
+<p></p>
+<p>3.在google Api建立專案及憑證並在Api程式庫中啟用google drive及blogger的Api</p>
+<p>4.將憑證下載下來並存在倉儲外面</p>
+<p>5.將程式中的ID改為自己的</p>
 <h1>W6-W9</h1>
 <div id="tipue_search_content">
 <h4>Online education</h4>
@@ -1664,13 +1683,16 @@
 <p>請重新下載<span> </span><a href="https://drive.google.com/open?id=1xDTDfcHU18ipqZNbOufMkSZqibqNeL2T">wcmj2020_tool.7z</a>, 檔案大小為 435 MB, 解開壓縮後為 1.8 GB (其中包括 Mypaint, Dia 與 OBS 等).</p>
 <p>學會利用 ShareX 與 OBS 拍攝螢幕操作影片, 並將個人維護倉儲與網站的過程影片放入個人網站中.</p>
 <h2>W9</h2>
-<p>電腦軟硬體簡介</p>
+<p>電腦軟硬體簡介----</p>
+<p>電腦:計算機包含軟體<span>、</span>硬體<span>、RAM(記憶體)、主機板、電源供應器、CPU、ROM、鍵          盤、滑鼠、螢幕等。</span></p>
 <p>硬體:有實體可觸到的,如鍵盤,滑鼠等</p>
 <p>主機:包含主機板,記憶體顯示卡,插孔等</p>
 <p>軟體:不可摸到的,如office系統</p>
-<p>作業系統:</p>
+<p>作業系統:Windos(記事本、接龍、踩地雷)</p>
+<h2>W10-W11</h2>
+<p>以SSH-key 來保護個人倉儲</p>
 <p></p>
-<h2>w12</h2>
+<h1>W12</h1>
 <section class="post-content">
 <p>如何利用<a href="https://leoeditor.com/">Leo Editor</a>管理<a href="https://github.com/50833110/cmsimde.git">CMSIMDE</a>網際網內容管理中<a href="https://github.com/getpelican/pelican">Pelican</a>網誌 修改其中共用、遠端及近端等三個設定檔和兩個城市按鈕轉檔的使用。</p>
 <h2>Leo Editor 基本用法</h2>
