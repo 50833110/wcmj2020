@@ -77,7 +77,17 @@ set GIT_SSH=%Disk%:\putty\plink.exe
 &lt;p&gt;在 Leo Editor 中向右移動節點的方法: ctrl + r, 表示要將節點往 right (右) 移動.&lt;/p&gt;
 &lt;p&gt;在 Leo Editor 中向左移動節點的方法: ctrl + l, 表示要將節點往 left (左) 移動.&lt;/p&gt;
 &lt;p&gt;在 Leo Editor 中向上移動節點的方法: ctrl + u, 表示要將節點往 up (上) 移動.&lt;/p&gt;
-&lt;p&gt;在 Leo Editor 中向下移動節點的方法: ctrl + d, 表示要將節點往 down (下) 移動.&lt;/p&gt;</content><category term="w12"></category><category term="2020wcmj"></category></entry><entry><title>2020 w13 課程摘要</title><link href=".%5C2020-WCM-W13-summary.html" rel="alternate"></link><published>2020-05-22T14:00:00+08:00</published><updated>2020-05-22T14:00:00+08:00</updated><author><name>50833110</name></author><id>tag:None,2020-05-22:.\2020-WCM-W13-summary.html</id><summary type="html"></summary><content type="html">&lt;!-- PELICAN_END_SUMMARY --&gt;</content><category term="w13"></category><category term="2020wcmj"></category></entry><entry><title>2018 Fall CP 課程</title><link href=".%5C2018-Fall-32-bit-Windows.html" rel="alternate"></link><published>2018-09-10T11:00:00+08:00</published><updated>2018-09-10T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:None,2018-09-10:.\2018-Fall-32-bit-Windows.html</id><summary type="html">&lt;p&gt;2018 Fall 一開始, 在一台已經 10 年的 32 位元的 Windows 7 操作系統中工作. 可攜的 Python 3.7.0 仍然可以配置, Leo Editor、PyQt5、flask、Markdown、pelican 與 bs4 的安裝, 也都沒有問題. 只有 Eric6 因為缺少必要模組與 Python 3.7.0 對應的 pyqt5-tools, 因此沒有安裝.&lt;/p&gt;
+&lt;p&gt;在 Leo Editor 中向下移動節點的方法: ctrl + d, 表示要將節點往 down (下) 移動.&lt;/p&gt;</content><category term="w12"></category><category term="2020wcmj"></category></entry><entry><title>2020 w13-14 課程摘要</title><link href=".%5C2020-WCM-W13-summary.html" rel="alternate"></link><published>2020-05-22T14:00:00+08:00</published><updated>2020-05-22T14:00:00+08:00</updated><author><name>50833110</name></author><id>tag:None,2020-05-22:.\2020-WCM-W13-summary.html</id><summary type="html">&lt;p&gt;以Leo 來編輯blogger(w13-w14)&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;以Leo 來編輯blogger(w13-w14)&lt;/p&gt;
+
+
+&lt;p&gt;1.在編輯器中開啟leo，並安裝 google-api-python-client和oauth2client&lt;/p&gt;
+&lt;p&gt;2.在leo中新增2個按鈕&lt;/p&gt;
+&lt;p&gt;Edit_blogger&lt;/p&gt;
+&lt;p&gt;Add_blogger&lt;/p&gt;
+&lt;p&gt;3.在google Api建立專案及憑證並在Api程式庫中啟用google drive及blogger的Api&lt;/p&gt;
+&lt;p&gt;4.將憑證下載下來並存在倉儲外面&lt;/p&gt;
+&lt;p&gt;5.將程式中的ID改為自己的&lt;/p&gt;</content><category term="w13"></category><category term="2020wcmj"></category></entry><entry><title>2018 Fall CP 課程</title><link href=".%5C2018-Fall-32-bit-Windows.html" rel="alternate"></link><published>2018-09-10T11:00:00+08:00</published><updated>2018-09-10T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:None,2018-09-10:.\2018-Fall-32-bit-Windows.html</id><summary type="html">&lt;p&gt;2018 Fall 一開始, 在一台已經 10 年的 32 位元的 Windows 7 操作系統中工作. 可攜的 Python 3.7.0 仍然可以配置, Leo Editor、PyQt5、flask、Markdown、pelican 與 bs4 的安裝, 也都沒有問題. 只有 Eric6 因為缺少必要模組與 Python 3.7.0 對應的 pyqt5-tools, 因此沒有安裝.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;2018 Fall 一開始, 在一台已經 10 年的 32 位元的 Windows 7 操作系統中工作. 可攜的 Python 3.7.0 仍然可以配置, Leo Editor、PyQt5、flask、Markdown、pelican 與 bs4 的安裝, 也都沒有問題. 只有 Eric6 因為缺少必要模組與 Python 3.7.0 對應的 pyqt5-tools, 因此沒有安裝.&lt;/p&gt;
 
 

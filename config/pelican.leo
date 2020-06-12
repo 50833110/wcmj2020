@@ -67,8 +67,10 @@
 <v t="leo.20200522141145.1"><vh>@clean 20200522-3.md</vh>
 <v t="leo.20200529161703.1"><vh>2020 w12 課程摘要</vh></v>
 </v>
-<v t="leo.20200522155214.1"><vh>@clean 20200522-2.md</vh></v>
+<v t="leo.20200522155214.1"><vh>@clean 20200522-2.md</vh>
 <v t="leo.20200606193502.1"><vh>2020 w13-14 課程摘要</vh></v>
+<v t="leo.20200612130515.1"><vh>1072990158043492525</vh></v>
+</v>
 </v>
 </v>
 </v>
@@ -163,7 +165,11 @@ Author: 50833110
 Slug: 2020-WCM-W13-summary
 ---
 
-&lt;!-- PELICAN_END_SUMMARY --&gt;</t>
+以Leo 來編輯blogger(w13-w14)
+
+&lt;!-- PELICAN_END_SUMMARY --&gt;
+
+@others</t>
 <t tx="leo.20200529144741.1">
 
 
@@ -486,7 +492,20 @@ Host github.com
 
 
 </t>
-<t tx="leo.20200606193502.1"></t>
+<t tx="leo.20200606193502.1">1.在編輯器中開啟leo，並安裝 google-api-python-client和oauth2client
+
+2.在leo中新增2個按鈕
+
+   Edit_blogger
+
+   Add_blogger
+
+3.在google Api建立專案及憑證並在Api程式庫中啟用google drive及blogger的Api
+
+4.將憑證下載下來並存在倉儲外面
+
+5.將程式中的ID改為自己的</t>
+<t tx="leo.20200612130515.1"></t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
